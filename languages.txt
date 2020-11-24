@@ -1,0 +1,321 @@
+Afro-Asiatic
+	ar	Arabic
+	he	Hebrew
+	ha	Hausa
+	syc	Syriac
+	so	Somali
+	ti	Tigrinya
+	kab	Kabyle
+	arz	Egyptian Arabic
+	om	Oromo
+	am	Amharic
+	mt	Maltese
+	arc	Aramaic
+	cop Coptic
+	akk Akkadian
+American
+	qu	Quechuan
+	cr	Cree
+	chy	Cheyenne
+	ay	Aymara
+	kl	Greenlandic
+	iu	Inuktitut
+	ik	Inupiaq
+	chr	Cherokee
+	nv	Navajo
+	gn	Guarani
+	nah	Nahuatl
+Austroasiatic
+	vi	Vietnamese
+	km	Khmer
+Austronesian
+	id	Indonesian
+	tl	Tagalog
+	mg	Malagasy
+	ms	Malay
+	ty	Tahitian
+	sm	Samoan
+	ceb	Cebuano
+	bug	Buginese
+	haw	Hawaiian
+	mi	Māori
+	su	Sundanese
+	bjn	Banjarese
+	bcl	Central Bikol
+	to	Tongan
+	jv	Javanese
+	ace	Acehnese
+	fj	Fijian
+	min	Minangkabau
+	war	Waray
+	pam	Kapampangan
+	pag	Pangasinan
+	ilo	Ilocano
+	ch	Chamorro
+	na	Nauruan
+	tet	Tetum
+Caucasian
+	ce	Chechen
+	ka	Georgian
+	kbd	Kabardian
+	xmf	Mingrelian
+	ady	Adyghe
+	lbe	Lak
+	av	Avar
+	lez	Lezgian
+	ab	Abkhaz
+Creole
+	pih	Pitkern
+	bi	Bislama
+	srn	Sranan Tongo
+	cbk	Chavacano
+	ht	Haitian Creole
+	pap	Papiamento
+	tpi	Tok Pisin
+	pcm	Naijá
+Dravidian
+	ta	Tamil
+	te	Telugu
+	ml	Malayalam
+	kn	Kannada
+Engineered languages
+	eo	Esperanto
+	nov	Novial
+	ia	Interlingua
+	ie	Interlingue
+	vo	Volapük
+	jbo	Lojban
+	io	Ido
+Hmong-Mien
+	hmn	Hmong
+Indo-European
+	sq	Albanian
+	hy	Armenian
+	Balto-Slavic
+		Baltic
+			lv	Latvian
+			lt	Lithuanian
+			ltg	Latgalian
+			sgs	Samogitian
+		Slavic
+			cs	Czech
+			ru	Russian
+			bg	Bulgarian
+			pl	Polish
+			sl	Slovene
+			hr	Croatian
+			uk	Ukrainian
+			sk	Slovak
+			sr	Serbian
+			mk	Macedonian
+			cu	Church Slavonic
+			bs	Bosnian
+			be	Belarusian
+			rue	Rusyn
+			hbs	Serbo-Croatian
+			dsb	Lower Sorbian
+			szl	Silesian
+			csb	Kashubian
+			hsb	Upper Sorbian
+	Celtic
+		ga	Irish
+		cy	Welsh
+		gv	Manx
+		gd	Scottish Gaelic
+		kw	Cornish
+		br	Breton
+	Germanic
+		East Germanic
+			got	Gothic
+		North Germanic
+			sv	Swedish
+			da	Danish
+			no	Norwegian
+			is	Icelandic
+			fo	Faroese
+			nn	Norwegian Nynorsk
+		West Germanic
+			en	English
+			de	German
+			nl	Dutch
+			af	Afrikaans
+			vls	West Flemish
+			ksh	Colognian
+			stq	Saterland Frisian
+			bar	Bavarian
+			gsw	Alemannic
+			zea	Zeelandic
+			nds	Low German
+			yi	Yiddish
+			ang	Old English
+			sco	Scots
+			pfl	Palatine German
+			fy	West Frisian
+			lb	Luxembourgish
+			li	Limburgish
+			frr	North Frisian
+			pdc	Pennsylvania German
+	Hellenic
+		el	Greek
+		grc	Ancient Greek
+		pnt	Pontic Greek
+	Indo-Iranian
+		Indo-Aryan
+			hi	Hindi
+			ur	Urdu
+			bn	Bengali
+			mr	Marathi
+			ne	Nepali
+			mai	Maithili
+			dv	Maldivian
+			ks	Kashmiri
+			or	Odia
+			sa	Sanskrit
+			gu	Gujarati
+			bpy	Bishnupriya Manipuri
+			as	Assamese
+			pi	Pali
+			pnb	Pakistani Punjabi
+			pa	Punjabi
+			kok	Konkaki
+			hif	Fiji Hindi
+			rmy	Vlax Romani
+			si	Sinhala (Sinhalese)
+			sd	Sindhi
+			bho	Bhojpuri
+		Iranian
+			fa	Persian
+			ku	Kurdish
+			zza	Zazaki
+			glk	Gilaki
+			tg	Tajik/Tajiki
+			ckb	Central Kurdish
+			lrc	Luri
+			mzn	Mazanderani
+			ps	Pashto
+			os	Ossetian
+	Italic
+		es	Spanish
+		fr	French
+		it	Italian
+		pt	Portuguese
+		ro	Romanian
+		ca	Catalan
+		la	Latin
+		gl	Galician
+		pms	Piedmontese
+		lad	Judaeo-Spanish
+		mwl	Mirandese
+		oc	Occitan
+		pcd	Picard
+		nap	Neapolitan
+		rm	Romansh
+		egl	Emilian-Romagnol
+		frp	Franco-Provençal
+		rup	Aromanian
+		fur	Friulian
+		vec	Venetian
+		co	Corsican
+		sc	Sardinian
+		ast	Asturian
+		nrf	Norman
+		an	Aragonese
+		lmo	Lombard
+		lij	Ligurian
+		wa	Walloon
+		ext	Extremaduran
+		scn	Sicilian
+		fro	Old French
+Isolate
+	eu	Basque
+Japonic
+	ja	Japanese
+Koreanic
+	ko	Korean
+Kradai
+	th	Thai
+	lo	Lao
+	za	Zhuang
+Mongolic
+	xal	Kalmyk
+	mn	Mongolian
+	bua	Buryat
+Niger-Congo
+	sw	Swahili
+	yo	Yoruba
+	rw	Rwanda
+	sg	Sango
+	wo	Wolof
+	sn	Shona
+	ss	Swazi
+	ak	Akan
+	ln	Lingala
+	ts	Tsonga
+	st	Sotho
+	ig	Igbo
+	xh	Xhosa
+	tum	Tumbuka
+	ff	Fula
+	ny	Chewa
+	kg	Kongo
+	tn	Setswana
+	ee	Ewe
+	bm	Bambara
+	rn	Rundi
+	ki	Kikuyu
+	ve	Tshivenda
+	tw	Twi
+	nso	Sepedi
+	zu	Zulu
+	lg	Luganda
+Pama-Nyugan
+	wbp	Warlpiri
+Papuan
+	sim	Seim
+Sino-Tibetan
+	zh	Chinese
+	my	Burmese
+	nan	Southern Min
+	yue	Yue
+	gan	Gan Chinese
+	bo	Standard Tibetan
+	new	Newar
+	cdo	Eastern Min
+	dz	Dzongkha
+	lzh	Classical Chinese
+	wuu	Wu
+	hak	Hakka
+	nru	Na
+	pck	Paite
+Turkic
+	tr	Turkish
+	uz	Uzbek
+	ug	Uyghur
+	kk	Kazakh
+	tk	Turkmen
+	sah	Yakut
+	ba	Bashkir
+	gag	Gagauz
+	krc	Karachay-Balkar
+	crh	Crimean Tatar
+	ky	Kyrgyz
+	kaa	Karakalpak
+	cv	Chuvash
+	tyv	Tuvan
+	tt	Tatar
+	azb	Iranian Azerbaijani
+	az	Azerbaijani
+Uralic
+	fi	Finnish
+	hu	Hungarian
+	et	Estonian
+	se	Northern Sami
+	mdf	Moksha
+	myv	Erzya
+	mrj	Hill Mari
+	vro	Võro
+	kv	Komi
+	udm	Udmurt
+	vep	Veps
+	koi	Komi-Permyak
+	mhr	Meadow Mari

@@ -4,6 +4,7 @@ from pathlib import Path
 import requests
 
 from language_utils.utils import tb_code_to_language
+from languages import Node
 from ud_parser.perf import Perf
 
 
@@ -52,7 +53,7 @@ class UDScores(HTMLParser):
                     Perf(
                         tb_code=tb_code,
                         aggregate='_' not in tb_code,
-                        language=tb_code_to_language(tb_code),
+                        language=Node.find_by_abbrv(tb_code_to_language(tb_code)),  # FIXME: tb_code can be aggregate
                         system=system,
                         perf=perf
                     )

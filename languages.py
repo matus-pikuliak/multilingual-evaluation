@@ -44,6 +44,7 @@ class Node:
         for node in cls.nodes:
             if getattr(node, 'abbreviation', None) == abbrv:
                 return node
+        raise AttributeError(f'No language with {abbrv}.')
 
 
 class Language(Node):

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from languages import Node
+from languages import Node, Language
 from language_utils.utils import fam
 
 recs = {}
@@ -9,7 +9,6 @@ for line in open('ner_42.txt'):
     language, *scores = line.strip().split()
     scores = [int(score) for score in scores]
     recs[language] = scores
-    print(Node.find_by_abbrv(language).name, Node.find_by_abbrv(language).parents())
 
 print('Total:', len(recs))
 print('Indo-E:', sum(
@@ -32,11 +31,11 @@ print()
 
 
 def weight(lang):
+    return 1
     if Node.find_by_abbrv(lang).belongs_to(fam.grs):
         return 1
     else:
         return 7
-
 
 for i in range(len(scores)):
     total_avg = np.mean([

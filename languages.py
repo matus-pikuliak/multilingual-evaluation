@@ -42,9 +42,9 @@ class Node:
     @classmethod
     def find_by_abbrv(cls, abbrv):
         for node in cls.nodes:
-            if getattr(node, 'abbreviation', None) == abbrv:
+            if isinstance(node, Language) and node.abbreviation == abbrv:
                 return node
-        raise AttributeError(f'No language with {abbrv}.')
+        return None
 
 
 class Language(Node):

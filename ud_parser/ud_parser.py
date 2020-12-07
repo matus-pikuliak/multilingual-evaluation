@@ -53,7 +53,7 @@ class UDScores(HTMLParser):
                     Perf(
                         tb_code=tb_code,
                         aggregate='_' not in tb_code,
-                        language=Node.find_by_abbrv(tb_code_to_language(tb_code)),  # FIXME: tb_code can be aggregate
+                        language=Node.find_by_abbrv(tb_code_to_language(tb_code)),
                         system=system,
                         perf=perf
                     )

@@ -6,19 +6,36 @@ ENV LANG C.UTF-8
 
 RUN apt-get update && apt-get install -y \
     python3 \
-    python3-pip
+    python3-pip \
+    wget && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 --no-cache-dir install --upgrade \
     pip \
     setuptools
 
-# Some TF tools expect a "python" binary
-RUN ln -s $(which ${PYTHON}) /usr/local/bin/python
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh
 
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+RUN pip3 install umap-learn[plot]
 RUN pip3 install jupyter matplotlib
 RUN pip3 install jupyter_http_over_ws
-RUN pip3 install ipython==7.9.0
+RUN pip3 install ipython
+RUN pip3 install ipympl
+RUN pip3 install jupyterlab
 RUN jupyter serverextension enable --py jupyter_http_over_ws
+
+RUN conda install -c conda-forge nodejs
+
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
+RUN jupyter lab build
 
 RUN mkdir -p /labs && chmod -R a+rwx /labs/
 WORKDIR /labs
@@ -31,4 +48,4 @@ EXPOSE 6006
 
 RUN python3 -m ipykernel.kernelspec
 
-CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter notebook --notebook-dir=/labs --ip 0.0.0.0 --no-browser --allow-root"]
+CMD ["bash", "-c", "source /etc/bash.bashrc && jupyter lab --notebook-dir=/labs --ip 0.0.0.0 --no-browser --allow-root"]

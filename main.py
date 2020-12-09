@@ -10,7 +10,7 @@ import scipy.stats
 
 from languages import Node
 
-from iso_codes import iso_codes
+
 
 """
 Compare results for various language families

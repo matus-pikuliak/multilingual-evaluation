@@ -3,7 +3,7 @@ from pathlib import Path
 
 import requests
 
-from language_utils.utils import tb_code_to_language
+from utils import tb_code_to_language
 from languages import Node
 from ud_parser.perf import Perf
 

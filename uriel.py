@@ -1,18 +1,36 @@
 import numpy as np
+import lang2vec.lang2vec as l2v
 
 
 class Uriel:
+    
+    coi = [
+        'Atlantic-Congo',
+        'Austronesian',
+        'Indo-European',
+        'Slavic',
+        'Germanic',
+        'Italic',
+        'Afro-Asiatic',
+        'Semitic',
+        'Sino-Tibetan',
+        'Nuclear_Trans_New_Guinea',
+        'Pama-Nyungan',
+        'Otomanguean',
+        'Austroasiatic',
+        'Dravidian',
+        'Turkic',
+        'Uralic',
+    ]
 
     def __init__(self, load=False, *args, **kwargs):
-        import lang2vec.lang2vec as l2v
-        self.l2v = l2v
         if load:
             self.load(*args, **kwargs)
 
     def load(self, languages=None, family=True, knn=True):
 
         if not languages:
-            languages = list(self.l2v.available_uriel_languages())
+            languages = list(l2v.available_uriel_languages())
         self.languages = languages
         if family:
             self.load_family(languages)
@@ -23,7 +41,7 @@ class Uriel:
         families = [
             family[2:]
             for family
-            in self.l2v.get_named_set(list(), 'fam')[0]  # This is the fastest way how to get the list of families.
+            in l2v.get_named_set(list(), 'fam')[0]  # This is the fastest way how to get the list of families.
         ]
         self.lang_fams = {
             lang: set(
@@ -33,25 +51,25 @@ class Uriel:
                 if val
             )
             for lang, vec
-            in self.l2v.get_features(languages, 'fam').items()
+            in l2v.get_features(languages, 'fam').items()
         }
 
     def load_knn(self, languages):
         self.knn_matrix = np.vstack([
             vec
             for vec
-            in self.l2v.get_features(
+            in l2v.get_features(
                 languages=languages,
                 feature_set_inp='syntax_knn+phonology_knn+inventory_knn',
             ).values()
         ])
 
-    def is_in_family(self, language, family):
-        try:
-            return family in self.lang_fams[language]
-        except AttributeError:
-            raise AttributeError('You should load with family=true')
-
-# u = Uriel()
-# u.load(['en', 'sk'], family=False)
-# print(u.is_in_family('en', 'Baltic'))
+    def is_in_family(self, language, families):
+#         language = l2v.LETTER_CODES.get(language, language)
+        if isinstance(families, str):    
+            try:
+                return families in self.lang_fams[language]
+            except AttributeError:
+                raise AttributeError('You should load with family=true')
+        else:
+            return any(self.is_in_family(language, fam) for fam in families)

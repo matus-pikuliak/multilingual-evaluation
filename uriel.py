@@ -28,22 +28,20 @@ class Uriel:
             self.load(*args, **kwargs)
 
     def load(self, languages=None, family=True, knn=True):
-
-        if not languages:
-            languages = list(l2v.available_uriel_languages())
-        self.languages = languages
+        self.languages = languages or list(l2v.available_uriel_languages())
         if family:
-            self.load_family(languages)
+            self.load_family()
         if knn:
-            self.load_knn(languages)
+            self.knn_matrix = self.load_knn(self.languages)
 
-    def load_family(self, languages):
+    @staticmethod
+    def load_family(languages):
         families = [
             family[2:]
             for family
             in l2v.get_named_set(list(), 'fam')[0]  # This is the fastest way how to get the list of families.
         ]
-        self.lang_fams = {
+        return {
             lang: set(
                 fam
                 for val, fam
@@ -54,12 +52,13 @@ class Uriel:
             in l2v.get_features(languages, 'fam').items()
         }
 
-    def load_knn(self, languages):
-        self.knn_matrix = np.vstack([
+    @staticmethod
+    def load_knn(languages):
+        return np.vstack([
             vec
             for vec
             in l2v.get_features(
-                languages=languages,
+                languages=self.languages,
                 feature_set_inp='syntax_knn+phonology_knn+inventory_knn',
             ).values()
         ])

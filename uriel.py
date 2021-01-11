@@ -66,7 +66,6 @@ class Uriel:
         ])
 
     def is_in_family(self, language, families):
-#         language = l2v.LETTER_CODES.get(language, language)
         if isinstance(families, str):    
             try:
                 return families in self.lang_fams[language]

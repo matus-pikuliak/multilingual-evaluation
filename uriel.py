@@ -26,11 +26,13 @@ class Uriel:
     def __init__(self, load=False, *args, **kwargs):
         if load:
             self.load(*args, **kwargs)
+        elif args or kwargs:
+            raise AttributeError('Arguments lost without load=True.')
 
     def load(self, languages=None, family=True, knn=True):
         self.languages = languages or list(l2v.available_uriel_languages())
         if family:
-            self.load_family()
+            self.lang_fams = self.load_family(self.languages)
         if knn:
             self.knn_matrix = self.load_knn(self.languages)
 
@@ -58,7 +60,7 @@ class Uriel:
             vec
             for vec
             in l2v.get_features(
-                languages=self.languages,
+                languages=languages,
                 feature_set_inp='syntax_knn+phonology_knn+inventory_knn',
             ).values()
         ])

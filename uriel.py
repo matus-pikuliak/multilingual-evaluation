@@ -1,5 +1,7 @@
-import numpy as np
 import lang2vec.lang2vec as l2v
+import numpy as np
+import pandas as pd
+import umap
 
 
 class Uriel:
@@ -29,12 +31,77 @@ class Uriel:
         elif args or kwargs:
             raise AttributeError('Arguments lost without load=True.')
 
-    def load(self, languages=None, family=True, knn=True):
+    def load(self, languages=None, family=True, knn=True, umap=False):
         self.languages = languages or list(l2v.available_uriel_languages())
         if family:
             self.lang_fams = self.load_family(self.languages)
         if knn:
             self.knn_matrix = self.load_knn(self.languages)
+        if umap:
+            self.umap_vectors = self.load_umap()
+            
+    def load_umap(self):
+        umap_object = umap.UMAP(
+            n_neighbors=15,
+            metric='cosine',
+            min_dist=0.5,
+            random_state=1,
+        )
+        return umap_object.fit(self.knn_matrix)
+        
+    def language_metadata(self):
+        
+        isos = dict(
+            line.strip().split(maxsplit=1)
+            for line
+            in open('iso.txt')
+        )
+        
+        return pd.DataFrame({
+            'fam': [' '.join(self.lang_fams[l]) for l in self.languages],
+            'code': self.languages,
+            'lang': [isos.get(lang, lang) for lang in self.languages],
+            'label': [
+                max(
+                    [0] + [
+                        i + 1
+                        for i, c
+                        in enumerate(self.coi)
+                        if c in self.lang_fams[lang]
+                    ]
+                )
+                for lang
+                in self.languages
+            ]
+        })
+    
+    def weights(self, languages, temperature=10, measure='cos'):
+    
+        def cos(l1, l2):
+            return 1 - sum(l1/np.linalg.norm(l1) * (l2/np.linalg.norm(l2)))
+        def euc(l1, l2):
+            return np.sqrt(sum((l1 - l2)**2))
+        def jac(l1, l2):
+            return 1 - sum(l1 & l2) / sum(l1 | l1)
+
+        vectors = self.knn_matrix[[self.languages.index(l) for l in languages]].astype(int)
+        similarities = np.array([
+            np.mean([
+                {'euc': euc, 'jac': jac, 'cos': cos}[measure](vectors[i1], vectors[i2])
+                for i1
+                in range(len(vectors))
+                if i1 != i2
+            ])
+            for i2 in range(len(vectors))
+        ])
+        weights = (np.e ** temperature) ** similarities
+        weights /= weights.sum()
+
+        return {
+            lang: score
+            for lang, score
+            in zip(languages, weights)
+        }
 
     @staticmethod
     def load_family(languages):

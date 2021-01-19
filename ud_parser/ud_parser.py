@@ -2,9 +2,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 import requests
+from lang2vec.lang2vec import LETTER_CODES
 
-from utils import tb_code_to_language
-from languages import Node
 from ud_parser.perf import Perf
 
 
@@ -49,11 +48,12 @@ class UDScores(HTMLParser):
         if self.state == 'table':
             for system, perf in self.parse_table(data):
                 tb_code = self.current_tb_code
+                language = tb_code.split('_')[0]
                 self.data.append(
                     Perf(
                         tb_code=tb_code,
                         aggregate='_' not in tb_code,
-                        language=Node.find_by_abbrv(tb_code_to_language(tb_code)),
+                        language=LETTER_CODES.get(language, language),
                         system=system,
                         perf=perf
                     )

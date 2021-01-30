@@ -113,6 +113,8 @@ class Uriel:
                 return families in self.lang_fams[language]
             except AttributeError:
                 raise AttributeError('You should load with family=true')
+            except KeyError:
+                return False
         else:
             return any(self.is_in_family(language, fam) for fam in families)
      

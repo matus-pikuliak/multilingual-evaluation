@@ -31,6 +31,18 @@ def heinzerling_pos():
     ])
     return languages, scores
 
+def heinzerling_pos_low():
+    languages = [line.split()[0] for line in open('./papers/heinzerling_pos_low.txt')]
+    scores = np.vstack([
+        [float(v) for v in line.split()[1:]]
+        for line
+        in open('./papers/heinzerling_pos_low.txt')
+    ])
+    r_languages, r_scores = heinzerling_pos()
+    languages += r_languages
+    scores = np.vstack([scores, r_scores[:, [1,2,4,10]]])
+    return languages, scores
+
 def artetxe_nli():
     languages = 'en fr es de el bg ru tr ar vi th zh hi sw ur'.split()
     scores = np.vstack([
@@ -101,6 +113,26 @@ def ud(metric='las'):
         for t
         in treebanks
     ])
+    return languages, scores
+
+def xtreme_pos():
+    lines = open('./papers/xtreme_pos.txt').read().splitlines()
+    languages = lines[0].split()
+    scores = np.vstack([
+        list(map(float, line.split()))
+        for line
+        in lines[1:]
+    ]).T
+    return languages, scores
+
+def xtreme_ner():
+    lines = open('./papers/xtreme_ner.txt').read().splitlines()
+    languages = lines[0].split()
+    scores = np.vstack([
+        list(map(float, line.split()))
+        for line
+        in lines[1:]
+    ]).T
     return languages, scores
 
 papers = {

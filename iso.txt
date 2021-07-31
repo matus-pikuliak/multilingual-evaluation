@@ -524,7 +524,7 @@ azm Ipalapa Amuzgo
 azn Western Durango Nahuatl
 azo Awing
 azt Faire Atta
-azz Highland Puebla Nahuatl 
+azz Highland Puebla Nahuatl
 baa Babatana
 bab Bainouk-Gunyuño
 bac Badui
@@ -1183,7 +1183,7 @@ bzv Naami
 bzw Basa (Nigeria)
 bzx Kɛlɛngaxo Bozo
 bzy Obanliku
-bzz Evant 
+bzz Evant
 caa Chortí
 cab Garifuna
 cac Chuj
@@ -1525,7 +1525,7 @@ czh Huizhou Chinese
 czk Knaanic
 czn Zenzontepec Chatino
 czo Min Zhong Chinese
-czt Zotung Chin 
+czt Zotung Chin
 daa Dangaléat
 dac Dambi
 dad Marik
@@ -1834,7 +1834,7 @@ dze Djiwarli
 dzg Dazaga
 dzl Dzalakha
 dzn Dzando
-dzo Dzongkha 
+dzo Dzongkha
 eaa Karenggapa
 ebg Ebughu
 ebk Eastern Bontok
@@ -1960,7 +1960,7 @@ ext Extremaduran
 eya Eyak
 eyo Keiyo
 eza Ezaa
-eze Uzekwe 
+eze Uzekwe
 faa Fasu
 fab Fa d'Ambu
 fad Wagi
@@ -2058,7 +2058,7 @@ fuv Nigerian Fulfulde
 fuy Fuyug
 fvr Fur
 fwa Fwâi
-fwe Fwe 
+fwe Fwe
 gaa Ga
 gab Gabri
 gac Mixed Great Andamanese
@@ -2403,7 +2403,7 @@ gyr Guarayu
 gyy Gunya
 gza Ganza
 gzi Gazi
-gzn Gane 
+gzn Gane
 haa Han
 hab Hanoi Sign Language
 hac Gurani
@@ -2620,7 +2620,7 @@ hwc Hawai'i Pidgin
 hwo Hwana
 hya Hya
 hye Armenian
-hyw Western Armenian 
+hyw Western Armenian
 iai Iaai
 ian Iatmul
 iar Purari
@@ -2798,7 +2798,7 @@ iyo Mesaka
 iyx Yaka (Congo)
 izh Ingrian
 izr Izere
-izz Izii 
+izz Izii
 jaa Jamamadí
 jab Hyam
 jac Jakalteko
@@ -2937,7 +2937,7 @@ jvn Caribbean Javanese
 jwi Jwira-Pepesa
 jya Jiarong
 jye Judeo-Yemeni Arabic
-jyy Jaya 
+jyy Jaya
 kaa Kara-Kalpak
 kab Kabyle
 kac Jingpho
@@ -3610,7 +3610,7 @@ kzv Komyandaret
 kzw Karirí-Xocó
 kzx Kamarian
 kzy Kango (Tshopo District)
-kzz Kalabra 
+kzz Kalabra
 laa Southern Subanen
 lab Linear A
 lac Lacandon
@@ -3974,7 +3974,7 @@ lyn Luyana
 lzh Literary Chinese
 lzl Litzlitz
 lzn Leinong Naga
-lzz Laz 
+lzz Laz
 maa San Jerónimo Tecóatl Mazatec
 mab Yutanduchi Mixtec
 mad Madurese
@@ -4626,7 +4626,7 @@ mzv Manza
 mzw Deg
 mzx Mawayana
 mzy Mozambican Sign Language
-mzz Maiadomu 
+mzz Maiadomu
 naa Namla
 nab Southern Nambikuára
 nac Narak
@@ -5143,7 +5143,7 @@ nzm Zeme Naga
 nzs New Zealand Sign Language
 nzu Teke-Nzikou
 nzy Nzakambay
-nzz Nanga Dama Dogon 
+nzz Nanga Dama Dogon
 oaa Orok
 oac Oroch
 oar Ancient Aramaic (up to 700 BCE)
@@ -5316,7 +5316,7 @@ oyb Oy
 oyd Oyda
 oym Wayampi
 oyy Oya'oya
-ozm Koonzime 
+ozm Koonzime
 pab Parecís
 pac Pacoh
 pad Paumarí
@@ -5674,7 +5674,7 @@ pys Paraguayan Sign Language
 pyu Puyuma
 pyx Pyu (Myanmar)
 pyy Pyen
-pzn Para Naga 
+pzn Para Naga
 qua Quapaw
 qub Huallaga Huánuco Quechua
 quc K'iche'
@@ -5733,7 +5733,7 @@ qxt Santa Ana de Tusi Pasco Quechua
 qxu Arequipa-La Unión Quechua
 qxw Jauja Wanca Quechua
 qya Quenya
-qyp Quiripi 
+qyp Quiripi
 raa Dungmali
 rab Camling
 rac Rasawa
@@ -5898,7 +5898,7 @@ rxw Karuwali
 ryn Northern Amami-Oshima
 rys Yaeyama
 ryu Central Okinawan
-rzh Rāziḥī 
+rzh Rāziḥī
 saa Saba
 sab Buglere
 sac Meskwaki
@@ -6427,7 +6427,7 @@ szn Sula
 szp Suabo
 szs Solomon Islands Sign Language
 szv Isu (Fako Division)
-szw Sawai 
+szw Sawai
 taa Lower Tanana
 tab Tabassaran
 tac Lowland Tarahumara
@@ -6958,7 +6958,7 @@ tzl Talossan
 tzm Central Atlas Tamazight
 tzn Tugun
 tzo Tzotzil
-tzx Tabriak 
+tzx Tabriak
 uam Uamué
 uan Kuan
 uar Tairuma
@@ -7091,7 +7091,7 @@ uwa Kuku-Uwanh
 uya Doko-Uyanga
 uzb Uzbek
 uzn Northern Uzbek
-uzs Southern Uzbek 
+uzs Southern Uzbek
 vaa Vaagri Booli
 vae Vale
 vaf Vafsi
@@ -7190,7 +7190,7 @@ vto Vitou
 vum Vumbu
 vun Vunjo
 vut Vute
-vwa Awa (China) 
+vwa Awa (China)
 waa Walla Walla
 wab Wab
 wac Wasco-Wishram
@@ -8160,4 +8160,4 @@ zza Kirdki
 zza Kirmanjki (macrolanguage)
 zza Zaza
 zza Zazaki
-zzj Zuojiang Zhuang 
+zzj Zuojiang Zhuang

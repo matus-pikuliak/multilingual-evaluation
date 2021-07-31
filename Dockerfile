@@ -24,12 +24,6 @@ RUN wget \
 COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
-RUN pip3 install umap-learn[plot]
-RUN pip3 install jupyter matplotlib
-RUN pip3 install jupyter_http_over_ws
-RUN pip3 install ipython
-RUN pip3 install ipympl
-RUN pip3 install jupyterlab
 RUN jupyter serverextension enable --py jupyter_http_over_ws
 
 RUN conda install -c conda-forge nodejs
@@ -43,8 +37,6 @@ RUN mkdir /.local && chmod a+rwx /.local
 
 # jupyter
 EXPOSE 8888
-# tensorboard
-EXPOSE 6006
 
 RUN python3 -m ipykernel.kernelspec
 

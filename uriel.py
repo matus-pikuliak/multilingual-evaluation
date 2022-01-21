@@ -35,8 +35,8 @@ class Uriel:
 
             
     def load(self, family=True, knn=True, umap=False):
-        self.uriel_languages = list(l2v.available_uriel_languages())
-        self.fam_languages = list(l2v.available_languages())
+        self.uriel_languages = list(sorted(l2v.available_uriel_languages()))
+        self.fam_languages = list(sorted(l2v.available_languages()))
         if family:
             self.lang_fams = self.load_family(self.fam_languages)
         if knn:
@@ -51,7 +51,7 @@ class Uriel:
             n_neighbors=15,
             metric='cosine',
             min_dist=0.5,
-            random_state=1,
+            random_state=2,
         )
         return umap_object.fit(knn_matrix)
 

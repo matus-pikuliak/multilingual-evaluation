@@ -135,6 +135,15 @@ def xtreme_ner():
     ]).T
     return languages, scores
 
+def massive():
+    languages = [line.split()[0] for line in open('./papers/massive.txt')]
+    scores = np.vstack([
+        [float(v) for v in line.split()[1:]]
+        for line in open('./papers/massive.txt')
+
+    ])
+    return languages, scores
+
 papers = {
     s: language_iso(f)()
     for s, f

@@ -1,0 +1,26 @@
+Hparams search over UMAP parameters
+- run them all and visualize one after another
+
+Visualization library that works with the URIEL class. Following options
+
+- Visualize the language space
+  - Color the languages based on language family
+  - Color the languages based on script?
+  
+- Visualize selected languages
+  - Ability to control color, size, alpha for each languages
+  
+- Compare two methods
+  - Visualize the columns as in the paper
+  
+Notebook that shows how we use this in visualizations similar to our paper
+
+
+URIEL class
+get a list of languages, for each language get
+- language families
+
+
+reqs: basemap pycountry
+
+report URIEL_LANGUAGES bug in get_uriel_languages

@@ -1,17 +1,16 @@
 from types import SimpleNamespace
 from lang2vec.lang2vec import LETTER_CODES
 
-fam = SimpleNamespace(
-    indo={'Indo-European'},
-    gis={'Germanic', 'Italic', 'Slavic'},
-)
-
 isos = dict(
     line.strip().split(maxsplit=1)
     for line
     in open('iso.txt')
 )
 
+
+# Some macro-languages are not represented in the URIEL database, e.g. there is no record for Arabic, only individual dialects. Here we switch from
+# several common macrolangauges to individual languages by using our best heuristic. E.g. for Cree we selected Plains Cree dialect because it is the
+# most common
 ISO_SWITCH = {
     'sqi': 'alb',  # l2v bug
     'zho': 'cmn',  # Mandarin Chinese
@@ -39,13 +38,12 @@ ISO_SWITCH = {
     'iku': 'ike',  # Eastern Canadian Inuktitut
 }
 
-def language_iso(func):
+def normalize_to_iso(lang):
+    lang = LETTER_CODES.get(lang, lang)  # LETTER_CODES from lang2vec library. They include ISO-693 switch from 2 to 3 letters
+    lang = ISO_SWITCH.get(lang, lang)  # Some left-over problems we were able to identify
+    raise if not in uriel_languages...
+    return lang
     
-    def wrap():
-        ls, s = func()
-        ls = [LETTER_CODES.get(l, l) for l in ls]
-        ls = [ISO_SWITCH.get(l, l) for l in ls]
-        return ls, s
-    
-    return wrap
+
+
 

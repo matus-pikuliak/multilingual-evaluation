@@ -2,14 +2,15 @@ import os
 
 from lang2vec import data as lang2vec_data
 import lang2vec.lang2vec as l2v
-import matplotlib
-import matplotlib.patheffects as PathEffects
-import matplotlib.pyplot as plt
-from mpl_toolkits.basemap import Basemap
 import numpy as np
 import pandas as pd
 import pycountry
 import umap
+
+
+from utils import create_logger
+logger = create_logger('ldb')
+
 
 class LinguisticDatabase:
     
@@ -29,11 +30,12 @@ class LinguisticDatabase:
         
     def load(self):
         
-        print('loading URIEl')
+        logger.info('Loading Linguistic Databse. This might take a minute.')
+        logger.info('Loading URIEL features.')
         if self.uriel:
             self.df = self.load_uriel_df()
 
-        print('loading geo')
+        logger.info('Loading geographical features.')
         if self.geo:
             df = self.load_geo_df()
             if self.df is None:
@@ -43,14 +45,15 @@ class LinguisticDatabase:
                 
         assert self.df is not None
 
-        print('loading family')
+        logger.info('Loading family features.')
         if self.family:
             df = self.load_family_df()
             self.df = self.df.join(df, how='left')
             
-        print('loading names')
-            
+        logger.info('Loading language names.')
         self.load_language_names()
+        
+        logger.info('Loading done.')
         
         return self
             
@@ -97,8 +100,8 @@ class LinguisticDatabase:
         
 
         # WALS files downloaded from https://github.com/cldf-datasets/wals/releases
-        lan_csv = pd.read_csv('./wals/wals-2020.3/raw/language.csv').set_index('pk')        # Contains geographical coordinates
-        wal_csv = pd.read_csv('./wals/wals-2020.3/raw/walslanguage.csv').set_index('pk')    # Contains ISO codes    
+        lan_csv = pd.read_csv('./wals-2020.3/raw/language.csv').set_index('pk')        # Contains geographical coordinates
+        wal_csv = pd.read_csv('./wals-2020.3/raw/walslanguage.csv').set_index('pk')    # Contains ISO codes    
         df = lan_csv.join(wal_csv)
 
         # Normalize ISO codes, some are null, some have multiple variants (we take first)
@@ -149,103 +152,3 @@ class LinguisticDatabase:
             pycountry.languages.get(alpha_3=lang).name if lang in pycountry.languages.indices['alpha_3'] else None
             for lang in self.df.index  
         ]
-
-        
-class Visualization:
-    
-    def __init__(self, feature, size, zoom, backend, ldb):
-        self.feature = feature
-        self.size = size  # tuple
-        self.zoom = zoom  # left right bottom up lims
-        self.backend = backend
-        self.ldb = ldb
-
-        
-    def load(self):
-        # ldb = LinguisticDatabase().load()
-        
-        plt.clf()
-        plt.rcParams["figure.figsize"] = self.size
-        
-        if self.feature == 'uriel':
-            if self.zoom is not None:
-                plt.xlim(zoom[0], zoom[1])
-                plt.ylim(zoom[2], zoom[3])
-                
-        if self.feature == 'geo':
-                
-            zoom = self.zoom or (-180, 180, -60, 75)
-
-            self.m = Basemap(
-                projection='merc',
-                llcrnrlat=zoom[2],
-                urcrnrlat=zoom[3],
-                llcrnrlon=zoom[0],
-                urcrnrlon=zoom[1],
-                lat_ts=20,
-                resolution='c'
-            )
-            self.m.drawcoastlines()
-            self.m.fillcontinents(color='white', lake_color='white')
-            self.m.drawparallels(np.arange(-90.,91.,30.), labels=[True,False,False,False])
-            self.m.drawmeridians(np.arange(-180.,181.,60.), labels=[False,True,True,False])
-            self.m.drawmapboundary(fill_color='white')
-
-        return self
-    
-    
-    def visualize_points(self, languages=None, **kwargs):
-        """
-        Visualize the results for given langauges. `**kwargs` are redirected to `matplotlib.plot` and can be used to format the output.
-        """
-        
-        if self.feature == 'uriel': 
-            x = self.ldb.df.loc[languages]['uriel_x']
-            y = self.ldb.df.loc[languages]['uriel_y']
-            
-        if self.feature == 'geo':
-            lon = self.ldb.df.loc[languages]['longitude']
-            lat = self.ldb.df.loc[languages]['latitude']
-            x, y = self.m(lon, lat)
-
-        plt.scatter(x, y, **kwargs)
-
-        plt.legend()
-
-    def show_all_languages(self, color_families=False, label_families=False, **kwargs):
-        
-        if not color_families:
-            self.visualize_points(self.ldb.df.index, **kwargs)
-            
-        elif color_families:
-            
-            # Set default families to color - this is an arbitrary selection of some of them
-            if color_families is True:
-                color_families = [
-                    'Atlantic-Congo',
-                    'Austronesian',
-                    'Indo-European',
-                    'Slavic',
-                    'Germanic',
-                    'Italic',
-                    'Afro-Asiatic',
-                    'Semitic',
-                    'Sino-Tibetan',
-                    'Nuclear_Trans_New_Guinea',
-                    'Pama-Nyungan',
-                    'Otomanguean',
-                    'Austroasiatic',
-                    'Dravidian',
-                    'Turkic',
-                    'Uralic',
-                ]
-                
-            for fam in color_families:
-                plt.scatter()
-
-            # plt.scatter all the other languages as well
-        
-    
-        
-        
-    

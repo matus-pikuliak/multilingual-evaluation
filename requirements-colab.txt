@@ -1,0 +1,7 @@
+numpy
+pandas
+matplotlib
+lang2vec
+umap-learn
+pycountry
+basemap

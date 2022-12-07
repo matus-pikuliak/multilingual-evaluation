@@ -8,7 +8,7 @@ import pycountry
 import umap
 
 
-from .utils import create_logger
+from utils import create_logger
 logger = create_logger('ldb')
 
 
@@ -30,7 +30,7 @@ class LinguisticDatabase:
         
     def load(self):
         
-        logger.info('Loading Linguistic Databse. This might take a minute.')
+        logger.info('Loading Linguistic Database. This might take a minute.')
         logger.info('Loading URIEL features.')
         if self.uriel:
             self.df = self.load_uriel_df()
@@ -133,13 +133,6 @@ class LinguisticDatabase:
             index=self.df.index,
             columns=family_codes,
         )
-        
-        # df['family_str'] = [
-        #     # [2:] because the families are coded with `F_` prefix
-        #     # `row` is a binary vector
-        #     ' '.join(family[2:] for value, family in zip(row, families_codes) if value)
-        #     for row in fam_df.values
-        # ]
         
         self.fields['family'] = family_codes + ['family_str']
 

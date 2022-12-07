@@ -1,9 +1,13 @@
 from lang2vec import lang2vec as l2v
+import matplotlib
 import matplotlib.patheffects as PathEffects
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from mpl_toolkits.basemap import Basemap
 import numpy as np
+
+
+from utils import create_logger
 
 
 class Visualization:
@@ -23,13 +27,14 @@ class Visualization:
         self.zoom = zoom
         self.backend = backend
         self.ldb = ldb
+        self.logger = create_logger('vis')
 
         
     def load(self):
         """
         Prepare the canvas for further visualizations.
         """
-        plt.clf()
+        plt.close()
         plt.rcParams["figure.figsize"] = self.size
         
         if self.feature == 'uriel':
@@ -80,9 +85,17 @@ class Visualization:
             y = self.ldb.df.loc[languages]['uriel_y']
             
         if self.feature == 'geo':
+            # ISO-639-1 codes can refer to an inclusive tag, such as Arabic, that does not have geo location set
+            # Here is a list of some of the more popular languages that will project these cases into codes that do have geo features available.
+            common_switch = {'ara': 'arb', 'est': 'ekk', 'fas': 'pes', 'hrv': 'hbs', 'msa': 'zsm'}
+            languages = [common_switch.get(l, l) for l in languages]
+            
             lon = self.ldb.df.loc[languages]['longitude']
             lat = self.ldb.df.loc[languages]['latitude']
             x, y = self.m(lon, lat)
+            
+            if sum(x.isna()):
+                self.logger.warning(f'{sum(x.isna())} languages do not have geo features, e.g.: {np.array(languages)[x.isna()][:5]}')
 
         # zorder is there mainly for geographical projection
         plt.scatter(x, y, zorder=3, **kwargs)
@@ -131,28 +144,73 @@ class Visualization:
             fam_ids = np.array([next((i for i, v in enumerate(row) if v), -1) for row in fam_vectors])  
             
             # visualize indiviudal languages
+            color_set = matplotlib.cm.get_cmap('tab20').colors
+            color_set = color_set[::2] + color_set[1::2]
             for i in range(len(color_families)):
                 languages = self.ldb.df.index[np.squeeze(np.argwhere(fam_ids==i))]
-                self.visualize_points(languages, c=list(mcolors.TABLEAU_COLORS)[i % 10], **kwargs)
+                self.visualize_points(languages, color=color_set[i % 20], **kwargs)
                 
             # set up labels
             if label_families:
                 for i, fam in enumerate(color_families):
-                    plt.scatter([], [], c=list(mcolors.TABLEAU_COLORS)[i % 10], label=fam)
+                    plt.scatter([], [], color=color_set[i % 20], label=fam)
                     
             # visualize all the other languages
             other = self.ldb.df.index[np.squeeze(np.argwhere(fam_ids==-1))]
             self.visualize_points(other, c='gray', **kwargs)
     
     
-    def show_languages(self, languages, c='r', s=50, alpha=0.5):
+    def show_languages(self, languages, c='r', s=50, **kwargs):
         """
         Simply show all the `languages` on the map
         """
-        self.visualize_points(languages, c=c, s=s, alpha=alpha)
+        self.visualize_points(languages, c=c, s=s, **kwargs)
+        
+        
+    def show_winners(self, languages, winners, s=50, **kwargs):
+        """
+        Color the languages based on the winning method. Each method has a unique color.
+        """
+        methods = sorted(set(winners))
+        color_set = matplotlib.cm.get_cmap('tab20').colors
+        color_set = color_set[::2] + color_set[1::2]
+        c = [color_set[methods.index(winner)] for winner in winners]
+        for method, color in zip(methods, cm):
+            plt.scatter([], [], c=color, s=s, label=method)
+        self.visualize_points(languages, s=s, c=c, **kwargs)
+        
+    
+    def show_comparison(self, languages, score_diff, method_names, **kwargs):
+        """
+        Compare two methods by coloring the languages green or red depending on what method is winning. The size of the point also shows the difference.
+        """
+                    
+        colors = ['g' if s > 0 else 'r' for s in score_diff]
+        scores = list(map(abs, score_diff))
+        mx, mn = max(scores), min(scores)
+        scores = [s - min(scores) for s in scores]  # normalization
+        scores = [s / max(scores) for s in scores]  # normalization
+        sizes = [s * 90 + 10 for s in scores]  # 10-100 scale
 
+        method_a, method_b = method_names
+        plt.scatter([], [], c='g', s=100, label=f'{method_a} wins by {mx}')
+        plt.scatter([], [], c='g', s=55, label=f'{method_a} wins by {(mx + mn) / 2}')
+        plt.scatter([], [], c='g', s=10, label=f'{method_a} wins by {mn}')
+        plt.scatter([], [], c='r', s=10, label=f'{method_b} wins by {mn}')
+        plt.scatter([], [], c='r', s=55, label=f'{method_b} wins by {(mx + mn) / 2}')
+        plt.scatter([], [], c='r', s=100, label=f'{method_b} wins by {mx}')
+        
+        self.visualize_points(languages, s=sizes, c=colors, **kwargs)
         
     
+    def show_performance(self, languages, scores, c='r', **kwargs):
+        mn, mx = min(scores), max(scores)
+        scores = [s - min(scores) for s in scores]  # normalization
+        scores = [s / max(scores) for s in scores]  # normalization
+        sizes = [s * 90 + 10 for s in scores]  # 10-100 scale
         
+        plt.scatter([], [], c=c, s=100, label=f'{mx:.2f}')
+        plt.scatter([], [], c=c, s=55, label=f'{(mx + mn) / 2:.2f}')
+        plt.scatter([], [], c=c, s=10, label=f'{mn:.2f}')
         
-    
+        self.visualize_points(languages, s=sizes, c=c, **kwargs)

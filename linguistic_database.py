@@ -105,16 +105,21 @@ class LinguisticDatabase:
         df = lan_csv.join(wal_csv)
 
         # Normalize ISO codes, some are null, some have multiple variants (we take first)
-        df = df[df.iso_codes.notna()]
+        df = df[df['iso_codes'].notna()]
         df['iso_codes'] = df['iso_codes'].apply(lambda s: s.split(', ')[0])
+        
+        # Multiple records can share one ISO code (e.g. Zulu, Zulu (northern), Zulu (southerns)) and they can even have different primary key
+        # in `languages.csv` and different geographical coordinates. We select here the record with the highest primary key value. For some
+        # reason, it seems the the more general languages have higher values there, e.g.:
+        #   - Spanish has 2548 and Spanish (Canary Islands) has 220
+        #   - Greek has 2540 Greek (Cypriot) has 88
+        df = df.sort_index()
+        df = df[~df['iso_codes'].duplicated(keep='last')]
 
         df = df[['iso_codes', 'latitude', 'longitude']].set_index('iso_codes')
         self.fields['geo'] = ['latitude', 'longitude']
 
-        # Multiple records can share one ISO code (e.g. Zulu, Zulu (northern), Zulu (southerns)) and they can even have different primary key
-        # in `languages.csv` and different geographical coordinates. Here we simply select the first record. This might not be an optimal
-        # solution, but it is only a handful of languages and I believe that the coordinates will still roughly match.
-        df = df[~df.index.duplicated()]
+
         
         return df
 

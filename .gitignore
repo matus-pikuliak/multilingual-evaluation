@@ -2,4 +2,6 @@
 /.venv/
 /.venv38/
 /.idea/
-/.ipynb_checkpoints/
+*.ipynb_checkpoints/
+/__pycache__/
+/wals-2020.3/

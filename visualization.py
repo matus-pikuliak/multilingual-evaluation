@@ -193,12 +193,12 @@ class Visualization:
         sizes = [s * 90 + 10 for s in scores]  # 10-100 scale
 
         method_a, method_b = method_names
-        plt.scatter([], [], c='g', s=100, label=f'{method_a} wins by {mx}')
-        plt.scatter([], [], c='g', s=55, label=f'{method_a} wins by {(mx + mn) / 2}')
-        plt.scatter([], [], c='g', s=10, label=f'{method_a} wins by {mn}')
-        plt.scatter([], [], c='r', s=10, label=f'{method_b} wins by {mn}')
-        plt.scatter([], [], c='r', s=55, label=f'{method_b} wins by {(mx + mn) / 2}')
-        plt.scatter([], [], c='r', s=100, label=f'{method_b} wins by {mx}')
+        plt.scatter([], [], c='g', s=100, label=f'{method_a} wins by {mx:.2f}')
+        plt.scatter([], [], c='g', s=55, label=f'{method_a} wins by {(mx + mn) / 2:.2f}')
+        plt.scatter([], [], c='g', s=10, label=f'{method_a} wins by {mn:.2f}')
+        plt.scatter([], [], c='r', s=10, label=f'{method_b} wins by {mn:.2f}')
+        plt.scatter([], [], c='r', s=55, label=f'{method_b} wins by {(mx + mn) / 2:.2f}')
+        plt.scatter([], [], c='r', s=100, label=f'{method_b} wins by {mx:.2f}')
         
         self.visualize_points(languages, s=sizes, c=colors, **kwargs)
         
